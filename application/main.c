@@ -31,7 +31,6 @@ int main(int argc, char **argv){
 	}
 	strcpy(outstr, "new_img.");
 	strcat(outstr, argv[format_index]);
-	printf("%s\n", outstr);
 
 	input_img = fopen(argv[img_index], "r");
 	if(input_img == NULL){

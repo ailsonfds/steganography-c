@@ -1,1 +1,8 @@
-Sabemos que o mundo um dia vai acabar...mas espero profundamente que nao seja hoje.
+O termo esteganografia deriva do grego, no qual estegano significa "esconder ou
+mascarar", e grafia, "escrita". Assim, esse termo pode ser definido como a arte de esconder
+informacoes, tornando-as ocultas. Seu principal objetivo e que esses dados nao sejam
+percebidos por terceiros. Somente o receptor da mensagem tem conhecimento de sua
+existencia, assim como da maneira como extrai-la.
+
+
+

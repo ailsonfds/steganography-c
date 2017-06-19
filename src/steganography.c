@@ -11,8 +11,8 @@ int power(int base, int index){
 
 int bitify(char *message, int **bitcode){
 	int i, size = strlen(message)*8, count = 0;
-	*bitcode = malloc(sizeof(int)*strlen(message)*8);
-	while(count < size/8){
+	*bitcode = malloc(sizeof(int)*strlen(message)*9);
+	while(count <= size/8){
 		for(i = 0; i < 8; i++){
 			(*bitcode)[count*8+i] = (message[count])%2;
 			(message[count])/=2;

@@ -3,7 +3,7 @@
 int main(int argc, char **argv){
 	int decode_index = 0, format_index = 0;
 	int  img_index = 0, msg_index = 0, count = 1;
-	char outstr[50];
+	char outstr[50] = "";
 	FILE *input_img;
 	FILE *output_img;
 	BITMAPFILEHEADER file_header;
@@ -29,7 +29,8 @@ int main(int argc, char **argv){
 		fprintf(stderr, "Leak of arguments!!\n");
 		abort();
 	}
-	strcpy(outstr, "new_img.");
+	strncpy(outstr, argv[img_index], strlen(argv[img_index])-4);
+	strcat(outstr, "_new.");
 	strcat(outstr, argv[format_index]);
 
 	input_img = fopen(argv[img_index], "r");
@@ -51,13 +52,6 @@ int main(int argc, char **argv){
 	}
 	fclose(input_img);
 
-	output_img = fopen(outstr, "w");
-
-	if(output_img == NULL){
-		fprintf(stderr, "File not opened!!\n");
-		return 0;
-	}
-
 	strcpy(message, "");	
 	if(strcmp(argv[msg_index-1], "-i") == 0){
 		msg = fopen(argv[msg_index], "r");
@@ -65,6 +59,7 @@ int main(int argc, char **argv){
 			tmpmsg[1] = '\0';
 			strcat(message, tmpmsg);
 		}
+		message[strlen(message)] = '\0';
 		msgsize = bitify(message, &bitmsg);
 	}else{
 		msg = fopen(argv[msg_index], "wb");
@@ -75,9 +70,17 @@ int main(int argc, char **argv){
 	else if(strcmp(argv[decode_index],"-d") == 0 && strcmp(argv[msg_index-1], "-o") == 0){
 		bitmsg = decodify(matriz, _height, _width, bitmsg, &msgsize);
 		desbitfy(msg, bitmsg, msgsize);
+		strcpy(outstr, argv[img_index]);
 	}else{
 		fprintf(stderr, "Invalid Options!!\n");
 		abort();
+	}
+
+	output_img = fopen(outstr, "w");
+
+	if(output_img == NULL){
+		fprintf(stderr, "File not opened!!\n");
+		return 0;
 	}
 
 	if(strcmp(argv[format_index], "bmp") == 0){

@@ -5,6 +5,10 @@ void read_header_BMP(FILE *img, BITMAPFILEHEADER *file_header, BITMAPINFOHEADER 
     strcpy(file_header->bfType, "");
     rewind(img);
     eoftrash = fread(&(*file_header).bfType, sizeof(file_header->bfType)-1, 1, img);
+    if(strcmp(file_header->bfType, "BM") != 0){
+        printf("Not a bmp format!!\n");
+        abort();
+    }
     eoftrash = fread(&(*file_header).bfSize, sizeof(file_header->bfSize), 1, img);
     eoftrash = fread(&(*file_header).bfReserved1, sizeof(file_header->bfReserved1), 1, img);
     eoftrash = fread(&(*file_header).bfReserved2, sizeof(file_header->bfReserved2), 1, img);
@@ -48,6 +52,10 @@ void read_header_PPM(FILE *img, PPMFILEHEADER *header){
     int eoftrash;
     rewind(img);
     eoftrash = fscanf(img, "%s", (*header).type);
+    if(!(strcmp(header->type, "P6") == 0 || strcmp(header->type, "P2") == 0)){
+        printf("Not a ppm valid format!!\n");
+        abort();
+    }
     eoftrash = fscanf(img, "%u %u %u", &(*header).height, &(*header).width, &(*header).range);
     fgetc(img);
     if(eoftrash == EOF) abort();

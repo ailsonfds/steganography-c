@@ -13,7 +13,7 @@ int main(int argc, char **argv){
 	int _height = 0, _width = 0;
 	char tmpmsg[2];
 	FILE *msg;
-	char message[5000000];
+	char message[50000];
 	int *bitmsg;
 	int msgsize;
 	while(count < argc){

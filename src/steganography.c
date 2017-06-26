@@ -11,31 +11,32 @@ int power(int base, int index){
 
 int bitify(char *message, int **bitcode){
 	int i, size = strlen(message)*8, count = 0;
-	*bitcode = malloc(sizeof(int)*strlen(message)*9);
-	while(count <= size/8){
+	*bitcode = malloc(sizeof(int)*(strlen(message)+1)*9);
+	while(count < size/8){
 		for(i = 0; i < 8; i++){
 			(*bitcode)[count*8+i] = (message[count])%2;
 			(message[count])/=2;
 		}
 		count++;
 	}
+	for(i = 0; i < 8; i++) (*bitcode)[count*8+i] = 0;
 	return size;
 }
 
 void desbitfy(FILE *output, int *bitcode, int msgsize){
-	int count = 0, sum, i;
-	char decoder[2];
-	char str[500] = "";
+	int count, sum, i;
+	char decoder;
+	char str[(msgsize/8)+1];
+	count = 0;
 	while(count < msgsize/8){
 		sum = 0;
-		for (i = 0; i < 8; i++)
+		for(i = 0; i < 8; i++)
 			sum += bitcode[count*8+i]*(power(2,i));
 		if(sum >= 256) sum--;
-		decoder[0] = sum;
-		decoder[1] = '\0';
+		decoder = 
+		str[count] = decoder;
 		count++;
-		strcat(str, decoder);
-		if(decoder[0] == '\0') break;
+		if(decoder == '\0') break;
 	}
 	fprintf(output, "%s\n", str);
 }

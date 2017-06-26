@@ -33,7 +33,7 @@ void desbitfy(FILE *output, int *bitcode, int msgsize){
 		for(i = 0; i < 8; i++)
 			sum += bitcode[count*8+i]*(power(2,i));
 		if(sum >= 256) sum--;
-		decoder = 
+		decoder = sum;
 		str[count] = decoder;
 		count++;
 		if(decoder == '\0') break;

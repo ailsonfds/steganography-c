@@ -1,5 +1,15 @@
 #include "steganography.h"
 
+void print_help() {
+    printf("============================================\n");
+    printf("Options:\n\n");
+    printf("\t-i INPUT       \tInput message file path. Use with -e\n");
+    printf("\t-o OUTPUT      \tOutput message file path. Use with -d\n");
+    printf("\t-d             \tDecode mode\n");
+    printf("\t-e             \tEncode mode\n");
+    printf("\t-f FORMAT IMAGE\tImage file format and path. FORMAT can be bmp (BITMAP) or ppm (PPM) and IMAGE is the image file path.\n");
+}
+
 int main(int argc, char **argv){
 	int decode_index = 0, format_index = 0;
 	int  img_index = 0, msg_index = 0, count = 1;
@@ -27,6 +37,7 @@ int main(int argc, char **argv){
 	}
 	if(decode_index == 0 || format_index == 0 || img_index == 0 || msg_index == 0 || argc != 7){
 		fprintf(stderr, "Leak of arguments!!\n");
+        print_help();
 		abort();
 	}
 	strncpy(outstr, argv[img_index], strlen(argv[img_index])-4);
